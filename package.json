@@ -4,9 +4,11 @@
   "description": "![cf](https://i.imgur.com/7v5ASc8.png)    \r # Lab 08: Vanilla REST API w/ Routing and In Memory Persistence",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "eslint . && jest --coverage",
-    "testWatch": "jest --coverage --watchAll",
+    "batman": "jest --coverage --watchAll",
     "test-nolint": "jest --coverage",
+    "testing-start": "nodemon main.js",
     "lint": "eslint ."
   },
   "repository": {
