@@ -32,7 +32,7 @@ module.exports = (router) => {
         customResponse.sendJSON(response, 200, note);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err); //eslint-disable-line
         customResponse.sendError(response, 404, err.message);
       });
     return undefined;

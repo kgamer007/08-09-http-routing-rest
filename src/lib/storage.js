@@ -43,3 +43,16 @@ storage.get = (schema, _id) => {
   }
   return Promise.reject(new Error(`${_id} not found`));
 };
+
+storage.delete = function del(schema, id) {
+  return new Promise((resolve, reject) => {
+    if (!schema) return reject(new Error('expected schema name'));
+    if (!id) return reject(new Error('expected id'));
+    if (!memory[schema]) return reject(new Error('schema not found'));
+
+    const item = memory[schema][id];
+    delete memory[schema][id];
+
+    return resolve(item);
+  });
+};

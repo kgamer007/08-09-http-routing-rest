@@ -10,12 +10,17 @@ module.exports = class Note {
     this.title = config.title;
     this.content = config.content || '';
   }
-
+  
   save() {
     return storage.save('Notes', this);
   }
 
-    /**
+  static deleteOne(_id) {
+    // TODO: write code here to delete a user in the storage module by targeting their id
+    return storage.delete('Files', _id);
+  }
+  
+  /**
    * The functions below are all "static" methods on this model.
    * Simply put, that means that you can't use them on instances of this model, but
    * rather use them as top level functions.
@@ -40,11 +45,7 @@ module.exports = class Note {
     return storage.get('Notes', _id);
   }
 
-  static updateOne(_id) {
+  static updateOne(_id) { //eslint-disable-line
     // TODO: Bonus to write code here teo update a user in the storage module by targeting their ID
-  }
-
-  static deleteOne(_id) {
-    // TODO: write code here to delete a user in the storage module by targeting their id
   }
 };
