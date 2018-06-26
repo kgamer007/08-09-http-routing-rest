@@ -11,7 +11,7 @@ I picked cats as my resource for this following lab. The cats have these propert
 
 ```
 Cats {
-  _id: a unique id that is created on instantiation
+  _id: a unique id that is created on instance
   title: string (optional)
   content: string (optional)
   weight: string (optional)
