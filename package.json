@@ -4,12 +4,12 @@
   "description": "![cf](https://i.imgur.com/7v5ASc8.png)    \r # Lab 08: Vanilla REST API w/ Routing and In Memory Persistence",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
     "test": "eslint . && jest --coverage",
-    "batman": "jest --coverage --watchAll",
+    "testWatch": "jest --coverage --watchAll",
     "test-nolint": "jest --coverage",
-    "testing-start": "nodemon main.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "start": "node index.js",
+    "dev-start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,8 @@
     "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-react": "^7.9.1",
     "jest": "^23.1.0",
+    "nodemon": "^1.17.5",
+    "superagent": "^3.8.3",
     "winston": "^3.0.0"
   },
   "dependencies": {
