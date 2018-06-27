@@ -49,6 +49,7 @@ storage.delete = function del(schema, id) {
     if (!schema) return reject(new Error('Did not find schema name'));
     if (!id) return reject(new Error('Where is ID input'));
     if (!memory[schema]) return reject(new Error('No such schema exists'));
+    if (!memory[schema][id]) return reject(new Error('No such ID exists'));
 
     const item = memory[schema][id];
     delete memory[schema][id];

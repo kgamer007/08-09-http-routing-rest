@@ -67,7 +67,7 @@ module.exports = class Router {
           const requestResponseCallback = this.routes[request.method][request.url.pathname];
           const isFunction = typeof requestResponseCallback === 'function';
           if (isFunction) return requestResponseCallback(request, response);
-          
+      
           customResponse.sendError(response, 404, 'Route Not Registered');
           return undefined;
         })
