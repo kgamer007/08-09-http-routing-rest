@@ -5,7 +5,7 @@ const superagent = require('superagent'); //eslint-disable-line
 const server = require('../lib/server');
 const Cats = require('../model/cat');
 
-const apiUrl = 'http://localhost:5000/api/v1/cats';
+const apiUrl = 'http://localhost:5000/api/v1/cat';
 
 const mockResource = {
   title: 'test title',
@@ -20,7 +20,7 @@ afterAll(() => server.stop());
 
 describe('POST to /api/v1/cat', () => {
   test('200 for successful saving of a new cat', () => {
-    return superagent.post('localhost:5000/api/v1/cat')
+    return superagent.post(apiUrl)
       .send(mockResource)
       .then((response) => {
         expect(response.body.title).toEqual(mockResource.title);
@@ -44,7 +44,7 @@ describe('POST to /api/v1/cat', () => {
         throw response;
       })
       .catch((err) => {
-        expect(err.status).toEqual(404);
+        expect(err.status).toEqual(400);
         expect(err).toBeInstanceOf(Error);
       });
   });
@@ -80,7 +80,7 @@ describe('GET /api/v1/cat', () => {
       });
   });
 
-  describe('DELETE /api/v1/books', () => {
+  describe('DELETE /api/v1/cat', () => {
     let mockResourceForGet; //eslint-disable-line
     beforeAll(() => {
       const newCat = new Cats(mockResource);
@@ -96,7 +96,7 @@ describe('GET /api/v1/cat', () => {
     test('200 successful DELETE request', () => {
       return superagent.delete(`${apiUrl}?id=${mockResourceForGet._id}`)
         .then((response) => {
-          expect(response.status).toEqual(200);
+          expect(response.status).toEqual(204);
         })
         .catch((err) => {
           throw err;
@@ -104,7 +104,7 @@ describe('GET /api/v1/cat', () => {
     });
 
     test('404 Failed DELETE request', () => {
-      return superagent.delete(`${apiUrl}?id=${mockResourceForGet._id}`)
+      return superagent.delete(`${apiUrl}?id=badPath`)
         .then((err) => {
           throw err;
         })

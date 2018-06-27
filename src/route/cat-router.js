@@ -27,16 +27,16 @@ module.exports = (router) => {
       return undefined;
     }
 
-    Cat.findOne(request.url.query.id)
+    Cat.findById(request.url.query.id)
       .then((cat) => {
         customResponse.sendJSON(response, 200, cat);
       })
       .catch((err) => {
-        console.log(err); //eslint-disable-line
         customResponse.sendError(response, 404, err.message);
       });
     return undefined;
   });
+  
 
   router.delete('/api/v1/cat', (request, response) => {
     logger.log(logger.INFO, 'ROUTE-CAT: DELETE /api/v1/cat');
@@ -46,7 +46,7 @@ module.exports = (router) => {
       return undefined;
     }
 
-    Cat.deleteOne(request.url.query.id)
+    Cat.delete(request.url.query.id)
       .then((catId) => {
         customResponse.sendJSON(response, 204, catId);
       })
