@@ -22,9 +22,6 @@ module.exports = (request) => {
     });
 
     request.on('end', () => {
-      // this takes the JSON message and turns it into a JS object, 
-      // and attaches it as the "body" propery on the bigger request object
-      // possible errors: passing in ' ', usually results in a SyntaxError
       try {
         request.body = JSON.parse(message);
         return resolve(request);

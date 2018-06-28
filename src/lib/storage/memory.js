@@ -1,11 +1,10 @@
 'use strict';
 
-const logger = require('./logger');
+const logger = require('../logger');
 
 const storage = module.exports = {};
 
 const memory = {};
-
 
 storage.save = (schema, item) => {
   return new Promise((resolve, reject) => {
@@ -27,16 +26,18 @@ storage.get = (schema, _id) => {
   return Promise.reject(new Error(`${_id} not found`));
 };
 
-storage.delete = function del(schema, id) {
+storage.delete = (schema, _id) => {
   return new Promise((resolve, reject) => {
-    if (!schema) return reject(new Error('Did not find schema name'));
-    if (!id) return reject(new Error('Where is ID input'));
-    if (!memory[schema]) return reject(new Error('No such schema exists'));
-    if (!memory[schema][id]) return reject(new Error('No such ID exists'));
+    if (!schema) return reject(new Error('Schema required'));
+    if (!_id) return reject(new Error('Id required'));
 
-    const item = memory[schema][id];
-    delete memory[schema][id];
-
-    return resolve(item);
+    if (!memory[schema][_id]) return reject(new Error('Unable to delete. No such schema exists'));
+    
+    if (memory[schema][_id]) {
+      logger.log(logger.INFO, `STORAGE: deleting ${JSON.stringify(memory[schema][_id])}`);
+      delete memory[schema][_id];
+      return resolve(_id);
+    }
+    return undefined;
   });
 };
